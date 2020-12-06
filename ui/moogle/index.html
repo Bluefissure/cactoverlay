@@ -1,0 +1,84 @@
+<html id="moogle_html">
+
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+
+    <!-- OverlayPlugin widget resize handle -->
+    <script type="text/javascript" charset="utf8" src="jquery-3.5.1.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../lib/DataTables/datatables.min.css" />
+
+    <script type="text/javascript" src="../../lib/DataTables/datatables.min.js"></script>
+    <link rel="stylesheet" href="../../resources/defaults.css">
+    <link rel="stylesheet" href="../../resources/resize_handle.css">
+    <script src="../../resources/common.js"></script>
+    <script src="../../resources/resize_handle.js"></script>
+    <script src="moogle.js"></script>
+
+    <style>
+        body,
+        html {
+            margin: 0;
+            background-color: white;
+        }
+
+        html {
+            height: 100%;
+            overflow: hidden;
+
+            /* FFXIV font look */
+            font-family: "Meiryo";
+            font-size: 12px;
+            font-weight: 300;
+        }
+
+        div {
+            overflow: hidden;
+            padding-left: 2px;
+            padding-right: 2px;
+        }
+    </style>
+</head>
+
+<body id="moogle_body">
+    <div id="moogle_button">
+        <button onclick="filter('')">全部</button>
+        <button onclick="filter('团队任务')">团队任务</button>
+        <button onclick="filter('大型任务')">大型任务</button>
+        <button onclick="filter('讨伐歼灭战：高难度')">讨伐歼灭战：高难度</button>
+        <button onclick="filter('其他')">其他</button>
+        <button onclick="loadStorage()">刷新</button>
+        <button onclick="switchHide()">隐藏</button>
+    </div>
+    <div>
+        <table id="moogle_table" class="display">
+            <thead>
+                <tr>
+                    <th>任务要求</th>
+                    <th>类别</th>
+                    <th>完成时间</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div id="moogle_footer"></div>
+    <div>
+        总点数：<font id="total_credit">0</font>
+    </div>
+    <div>
+        日期：<font id="date"></font>
+    </div>
+    <div>
+        版本：v1.0.0.3 &nbsp;
+        <a target="_blank" href="http://act.ff.sdo.com/20200622Moguli/index.html#/changelog">活动页</a>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@thewakingsands/kit-tooltip/dist/bundle.js"></script>
+<script>
+    CafeKitTooltip.initTooltip();
+</script>
+
+</html>
