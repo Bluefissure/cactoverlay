@@ -54,7 +54,7 @@ function loadStorage() {
     t.clear();
     Object.keys(localStorage).forEach(function(key){
         let value = JSON.parse(localStorage.getItem(key) || '{}');
-        console.log(value);
+        // console.log(value);
         t.row.add([key, value['2C95'] || 0, value['2C8D'] || 0]);
     });
     t.draw();
