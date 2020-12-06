@@ -33,11 +33,13 @@ $(document).ready(function () {
         loadStorage();
     })
     $('#copyShoutButton').click(() => {
-        let message = "/sh 青魔螺旋尾统计：";
+        let message = "/sh 青魔螺旋尾/导弹统计：";
         let first = true;
         Object.keys(localStorage).forEach(function(key){
-            let value = localStorage.getItem(key);
-            message += (first ? "" : ", ") + key + ":" + value;
+            let value = JSON.parse(localStorage.getItem(key) || '{}');
+            let tCount = value['2C95'] || 0;
+            let mCount = value['2C8D'] || 0;
+            message += (first ? "" : ", ") + key + ":" + tCount + "/" + mCount;
             first = false;
         });
         message = message.trim(", ");
@@ -51,8 +53,9 @@ function loadStorage() {
     let t = $('#tailscrew_table').DataTable();
     t.clear();
     Object.keys(localStorage).forEach(function(key){
-        let value = localStorage.getItem(key);
-        t.row.add([key, value]);
+        let value = JSON.parse(localStorage.getItem(key) || '{}');
+        console.log(value);
+        t.row.add([key, value['2C95'] || 0, value['2C8D'] || 0]);
     });
     t.draw();
 }
@@ -68,10 +71,14 @@ function switchHide() {
     }
 }
 
-function updateCount(playerName) {
-    let count = parseInt(localStorage.getItem(playerName)) || 0;
+function updateCount(playerName, actionId) {
+    let countDict = JSON.parse(localStorage.getItem(playerName) || '{}');
+    let count = parseInt(countDict[actionId] || "0");
     count += 1;
-    localStorage.setItem(playerName, count);
+    countDict[actionId] = count;
+    // console.log(countDict);
+    localStorage.setItem(playerName, JSON.stringify(countDict));
+    // console.log(localStorage);
     loadStorage();
 }
 
@@ -84,8 +91,12 @@ addOverlayListener('onLogEvent', function (e) {
         let tailscrewPattern = Regexes.ability({ id: '2C95' });
         r = e.detail.logs[i].match(tailscrewPattern);
         if(r){
-            console.log(r);
-            updateCount(r.groups.source);
+            updateCount(r.groups.source, '2C95');
+        }
+        let missilePattern = Regexes.ability({ id: '2C8D' });
+        r = e.detail.logs[i].match(missilePattern);
+        if(r){
+            updateCount(r.groups.source, '2C8D');
         }
     }
 });
