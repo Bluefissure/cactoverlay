@@ -1,0 +1,68 @@
+<html id="actlog_html">
+
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+
+    <!-- OverlayPlugin widget resize handle -->
+    <script type="text/javascript" charset="utf8" src="../../lib/jquery-3.5.1.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../lib/DataTables/datatables.min.css" />
+    <script type="text/javascript" src="../../lib/DataTables/datatables.min.js"></script>
+
+    <link rel="stylesheet" href="../../resources/defaults.css">
+    <link rel="stylesheet" href="../../resources/resize_handle.css">
+
+    <script type="module" src="../../resources/common.js"></script>
+    <script type="module" src="../../resources/regexes.js"></script>
+    <script type="module" src="../../resources/netregexes.js"></script>
+    <!-- <script src="../../resources/resize_handle.js"></script> -->
+    <script type="module" src="actlog.js"></script>
+
+    <style>
+        body,
+        html {
+            margin: 0;
+            background-color: white;
+        }
+
+        html {
+            height: 100%;
+            overflow: hidden;
+
+            /* FFXIV font look */
+            font-family: "Meiryo";
+            font-size: 12px;
+            font-weight: 300;
+        }
+
+        div {
+            overflow: hidden;
+            padding-left: 2px;
+            padding-right: 2px;
+        }
+    </style>
+</head>
+
+<body id="actlog_body">
+    <div id="actlog_button">
+        <center>
+            <button id="startStopButton">停止记录</button>
+            <button id="cleatLogButton">清空</button>
+        </center>
+    </div>
+    <div>
+        <table id="actlog_table" class="display" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>日志</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div id="actlog_footer"></div>
+</body>
+
+</html>
