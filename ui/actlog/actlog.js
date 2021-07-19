@@ -31,7 +31,7 @@ addOverlayListener('onLogEvent', function(e) {
     for (let i = 0; i < e.detail.logs.length; i++) {
         let r = e.detail.logs[i];
         t.row.add({ Log: r });
-        console.log(r);
+        // console.log(r);
     }
     t.draw(false);
     let num_rows = t.page.info().recordsTotal;
