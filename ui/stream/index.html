@@ -1,0 +1,64 @@
+<html id="stream_html">
+
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+
+    <!-- OverlayPlugin widget resize handle -->
+    <script type="text/javascript" charset="utf8" src="jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="./node_modules/obs-websocket-js/dist/obs-websocket.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../lib/DataTables/datatables.min.css" />
+    <script type="text/javascript" src="../../lib/DataTables/datatables.min.js"></script>
+    <link rel="stylesheet" href="../../resources/defaults.css">
+    <link rel="stylesheet" href="../../resources/resize_handle.css">
+    <script type="module" src="../../resources/common.js"></script>
+    <script src="../../resources/resize_handle.js"></script>
+    <script type="module" src="./stream.js"></script>
+
+</head>
+
+<body id="stream-body">
+    <div id="div" style="text-align:center; background-color: rgba(255,255,255,1); border-radius: 30px; padding: 1rem;">
+        <div><p style="font-weight: bold;">OBS 狒狒助手</p></div>
+        <div id="connection">
+            <table class="tg" style="margin-left: auto; margin-right: auto;">
+                <thead>
+                  <tr>
+                    <td class="tg-0lax"><input id="address" placeholder="地址" value="127.0.0.1:4444"></td>
+                    <td class="tg-0lax" rowspan="2"><button id="connect-button">连接</button></td>
+                  </tr>
+                  <tr>
+                    <td class="tg-0lax"><input id="password" type="password" placeholder="密码（可选）"></td>
+                  </tr>
+                </thead>
+            </table>
+        </div>
+        <div>
+            <p style="color:green; font-weight: bold;" id="info_msg"></p>
+            <p style="color:red; font-weight: bold;" id="error_msg"></p>
+        </div>
+        <div >
+            <p>
+                <input id="recording-check" type="checkbox">自动录像</input>
+                <input id="wipe-check" type="checkbox">团灭重录</input><p></p>
+                <input id="recording-path" placeholder="录像存放路径">
+                <button id="recording-button">应用</button>
+            </p>
+        </div>
+        <div id="reload_button">
+            <button onclick="reloadPage()"> 刷新页面 </button>
+        </div>
+    </div>
+</body>
+<script>
+    function reloadPage() {
+        location.reload();
+    }
+</script>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/@thewakingsands/kit-tooltip/dist/bundle.js"></script>
+<script>
+    CafeKitTooltip.initTooltip();
+</script> -->
+
+</html>
