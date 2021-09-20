@@ -1,5 +1,3 @@
-import Cookies from './node_modules/js-cookie/dist/js.cookie.mjs'
-
 const xivapi = 'https://cafemaker.wakingsands.com';
 let display = true;
 let isObsConnected = false;
@@ -186,11 +184,6 @@ addOverlayListener("ChangeZone", (e) => {
   });
 });
 
-addOverlayListener('onGameExistsEvent', (e) => {
-  if (!isObsConnected) return;
-  stopRecording();
-});
-
 addOverlayListener('OnlineStatusChanged', (e) => {
   if (!isObsConnected) return;
   obs.send('GetSourcesList').then(data => {
@@ -208,4 +201,9 @@ addOverlayListener('onPartyWipe', (e) => {
   if (!$('#wipe-check').is(':checked')) return;
   // console.log("wipe");
   reStartRecording();
+});
+
+addOverlayListener('onGameExistsEvent', (e) => {
+  if (!isObsConnected) return;
+  stopRecording();
 });
