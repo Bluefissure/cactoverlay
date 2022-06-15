@@ -207,10 +207,10 @@ addOverlayListener('onGameExistsEvent', (e) => {
 
 function partyWipe(){
   if (partyWipeLock) return;
-  partyWipeLock = true;
   if (!isObsConnected) return;
   if (!$('#wipe-check').is(':checked')) return;
+  partyWipeLock = true;
+  setTimeout(() => (partyWipeLock = false), 3000);
   // console.log("wipe");
   reStartRecording();
-  setTimeout(() => (partyWipeLock = false), 3000);
 }
