@@ -3,6 +3,8 @@ let display = true;
 let isObsConnected = false;
 const obs = new OBSWebSocket();
 const cookiePassword = Cookies.get('password');
+let partyWipeLock = false;
+
 if (cookiePassword !== undefined) {
   $('#password').val(cookiePassword);
 }
@@ -146,7 +148,7 @@ addOverlayListener("LogLine", (e) => {
       } else if (e.line[4] === "wipe") {
         reStartRecording();
       }
-    }
+    } else if (e.line[0] === "33" && /^4000001[026]$/.test(e.line[3])) partyWipe();
 });
 
 addOverlayListener("ChangeZone", (e) => {
@@ -196,14 +198,19 @@ addOverlayListener('OnlineStatusChanged', (e) => {
   });
 });
 
-addOverlayListener('onPartyWipe', (e) => {
-  if (!isObsConnected) return;
-  if (!$('#wipe-check').is(':checked')) return;
-  // console.log("wipe");
-  reStartRecording();
-});
+// addOverlayListener('onPartyWipe', (e) => {});
 
 addOverlayListener('onGameExistsEvent', (e) => {
   if (!isObsConnected) return;
   stopRecording();
 });
+
+function partyWipe(){
+  if (partyWipeLock) return;
+  if (!isObsConnected) return;
+  if (!$('#wipe-check').is(':checked')) return;
+  partyWipeLock = true;
+  setTimeout(() => (partyWipeLock = false), 3000);
+  // console.log("wipe");
+  reStartRecording();
+}
