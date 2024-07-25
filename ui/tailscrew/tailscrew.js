@@ -88,12 +88,12 @@ addOverlayListener('onLogEvent', function (e) {
         if (r) {
             switchHide();
         }
-        let tailscrewPattern = Regexes.ability({ id: '2C95' });
+        let tailscrewPattern = /(?<timestamp>^.{14}) ActionEffect 1[56]:(?<sourceId>[0-9A-F]{8}):(?<source>[^:]*?):(?<id>2C95):(?<ability>[^:]*?):(?<targetId>[0-9A-F]{8}):(?<target>[^:]*?):/;
         r = e.detail.logs[i].match(tailscrewPattern);
         if(r){
             updateCount(r.groups.source, '2C95');
         }
-        let missilePattern = Regexes.ability({ id: '2C8D' });
+        let missilePattern = /(?<timestamp>^.{14}) ActionEffect 1[56]:(?<sourceId>[0-9A-F]{8}):(?<source>[^:]*?):(?<id>2C8D):(?<ability>[^:]*?):(?<targetId>[0-9A-F]{8}):(?<target>[^:]*?):/;
         r = e.detail.logs[i].match(missilePattern);
         if(r){
             updateCount(r.groups.source, '2C8D');
@@ -107,10 +107,6 @@ addOverlayListener('onPlayerChangedEvent', function (e) {
 
 addOverlayListener('onUserFileChanged', function (e) {
     // console.log(`User file ${e.file} changed!`);
-});
-
-addOverlayListener('FileChanged', function (e) {
-    // console.log(`File ${e.file} changed!`);
 });
 
 callOverlayHandler({ call: 'cactbotRequestState' });
