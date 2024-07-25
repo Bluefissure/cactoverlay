@@ -84,7 +84,7 @@ function updateCount(playerName, actionId) {
 
 addOverlayListener('onLogEvent', function (e) {
     for (let i = 0; i < e.detail.logs.length; i++) {
-        let r = e.detail.logs[i].match('00:0038:(螺旋尾|妖表青魔)');
+        let r = e.detail.logs[i].match('00:0038::(螺旋尾|妖表青魔)');
         if (r) {
             switchHide();
         }
